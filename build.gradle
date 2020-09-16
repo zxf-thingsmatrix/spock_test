@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'groovy'
+}
+
+group 'lost.canvas'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+    mavenCentral()
+}
+
+ext {
+//    groovyVer = '3.0.5'
+    spockVer = '2.0-M3-groovy-3.0'
+}
+
+dependencies {
+//    implementation 'org.codehaus.groovy:groovy-all:$groovyVer'
+    testImplementation "org.spockframework:spock-core:$spockVer"
+//    testImplementation "org.spockframework:spock-spring:$spockVer"
+}
+
+test {
+    useJUnitPlatform()
+}
