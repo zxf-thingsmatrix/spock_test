@@ -30,7 +30,7 @@ class SpockTest extends Specification {
         a == 2
     }
 
-    def "test expect where"() {
+    def "test where"() {
         expect:
         calc(a, b) == c
         where:
@@ -40,13 +40,48 @@ class SpockTest extends Specification {
         0 | 1 | 1
     }
 
-    def "test expect where 2"() {
+    def "test where 2"() {
         expect:
         calc(a, b) == c
         where:
         a << [1, 1, 0]
         b << [2, 0, 1]
         c << [3, 1, 1]
+    }
+
+    def "test where 3"() {
+        expect:
+        calc(a, b) == c
+        where:
+        a << (1..4)
+        b << (4..1)
+        c << [5] * 4
+    }
+
+    def "test where 4"() {
+        expect:
+        calc(a, b) == c
+        where:
+        a << (1..4)
+        b = 5 - a
+        c << [5] * 4
+    }
+
+    def "test where 5"() {
+        when:
+        println "test $filename"
+        then:
+        filename.toLowerCase() == "abc"
+        where:
+        filename << GroovyCollections.combinations([["a", "A"], ["b", "B"], ["c", "C"]].iterator())*.join()
+    }
+
+    def "test stub"() {
+
+    }
+
+    def "test mock"() {
+
     }
 
     def calc(a, b) {
